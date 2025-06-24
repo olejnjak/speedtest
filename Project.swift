@@ -1,4 +1,5 @@
 import ProjectDescription
+import ProjectDescriptionHelpers
 
 let project = Project(
     name: "UbiquitySpeedTest",
@@ -18,6 +19,11 @@ let project = Project(
                 .target(name: "CoreInterface"),
                 .target(name: "SpeedTestUI"),
             ]
+        ),
+        .dynamicModule(name: "CoreInterface"),
+        .dynamicModule(
+            name: "SpeedTestUI",
+            hasResources: true
         ),
     ]
 )
