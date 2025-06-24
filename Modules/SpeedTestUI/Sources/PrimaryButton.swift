@@ -22,7 +22,7 @@ public struct StartStopButton: View {
             Text(state.title.uppercased())
                 .font(.callout)
                 .bold()
-                .foregroundStyle(SpeedTestUIAsset.Colors.foregroundPrimary.swiftUIColor)
+                .foregroundStyle(SpeedTestUIAsset.Colors.foregroundSecondary.swiftUIColor)
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(foregroundStyle())
