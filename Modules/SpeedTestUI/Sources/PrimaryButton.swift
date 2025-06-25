@@ -64,7 +64,6 @@ public struct StartStopButton: View {
     }
 }
 
-@available(iOS 17, *)
 #Preview {
     @Previewable @State var state = StartStopButton.State.start
 
