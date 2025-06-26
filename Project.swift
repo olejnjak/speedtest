@@ -15,6 +15,7 @@ let project = Project(
             product: .app,
             bundleId: "cz.olejnjak.ubiquityspeedtest",
             sources: "SpeedTest/Sources/**",
+            resources: "SpeedTest/Resources/**",
             dependencies: [
                 .target(name: "CoreInterface"),
                 .target(name: "SpeedTestUI"),
