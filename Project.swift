@@ -14,6 +14,9 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "cz.olejnjak.ubiquityspeedtest",
+            infoPlist: .extendingDefault(with: [
+                "UILaunchScreen": [:]
+            ]),
             sources: "SpeedTest/Sources/**",
             resources: "SpeedTest/Resources/**",
             dependencies: [
