@@ -8,6 +8,14 @@ public enum SelectServerError: Error {
 public struct SelectServerResult {
     public let server: Server
     public let ping: TimeInterval
+
+    public init(
+        server: Server,
+        ping: TimeInterval
+    ) {
+        self.server = server
+        self.ping = ping
+    }
 }
 
 public protocol SelectServerUseCase {

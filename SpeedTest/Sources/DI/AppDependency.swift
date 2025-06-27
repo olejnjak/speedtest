@@ -1,7 +1,9 @@
 import CoreInterface
+import Servers
 
 final class AppDependency {
-    var fetchServersUseCase: FetchServersUseCase { FetchServersUseCaseImpl() }
-    var performDownloadSpeedTestUseCase: PerformDownloadSpeedTestUseCase { PerformDownloadSpeedTestUseCaseImpl() }
-    var selectServerUseCase: SelectServerUseCase { SelectServerUseCaseImpl() }
+    let apiClient: APIClient = APIClientImpl()
+
+    lazy var serversRepository = createServersRepository(apiClient: apiClient)
 }
+

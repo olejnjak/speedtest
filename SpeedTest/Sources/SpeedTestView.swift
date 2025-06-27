@@ -45,6 +45,9 @@ struct SpeedTestView: View {
             )
         }
         .padding()
+        .alert(item: $viewModel.error) { error in
+            Alert(title: Text("Error"))
+        }
     }
 }
 

@@ -22,12 +22,19 @@ let project = Project(
             dependencies: [
                 .target(name: "CoreInterface"),
                 .target(name: "SpeedTestUI"),
+                .target(name: "Servers"),
             ]
         ),
         .dynamicModule(name: "CoreInterface"),
         .dynamicModule(
             name: "SpeedTestUI",
             hasResources: true
+        ),
+        .staticModule(
+            name: "Servers",
+            dependencies: [
+                .target(name: "CoreInterface"),
+            ]
         ),
     ]
 )

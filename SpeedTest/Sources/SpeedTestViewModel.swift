@@ -2,6 +2,13 @@ import CoreInterface
 import Observation
 import SpeedTestUI
 
+struct PresentableError: Identifiable {
+    var id: String { "T:\(title), M:\(message)" }
+
+    let title: String
+    let message: String
+}
+
 protocol SpeedTestViewModel {
     var speed: Double { get }
     var maxSpeed: Double { get }
@@ -10,6 +17,7 @@ protocol SpeedTestViewModel {
     var ping: InfoRow.Content { get }
 
     var isTestRunning: Bool { get }
+    var error: PresentableError? { get set }
 
     func startTest()
     func stopTest()
@@ -23,6 +31,7 @@ final class MockSpeedTestViewModel: SpeedTestViewModel {
     var ping: InfoRow.Content = .none
     
     var isTestRunning: Bool = false
+    var error: PresentableError?
 
     func startTest() {
 
@@ -59,6 +68,8 @@ func createSpeedTestViewModel(
 private final class SpeedTestViewModelImpl: SpeedTestViewModel {
     let speed: Double = 100
     let maxSpeed: Double = 1000
+
+    var error: PresentableError?
 
     private(set) var server: InfoRow.Content = .none
     private(set) var ping: InfoRow.Content = .none
@@ -105,6 +116,11 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
                 // TODO: Concrete errors
                 server = .none
                 ping = .none
+
+                self.error = .init(
+                    title: "Error",
+                    message: String(describing: error)
+                )
             }
         }
     }

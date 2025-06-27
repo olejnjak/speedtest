@@ -9,14 +9,14 @@ public struct InfoRow: View {
     private let content: Content
 
     public var body: some View {
-        HStack {
+        HStack(spacing: 32) {
             Text(title)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .bold()
                 .font(.body)
                 .foregroundStyle(SpeedTestUIAsset.Colors.foregroundPrimary.swiftUIColor)
 
             content
+                .frame(maxWidth: .infinity, alignment: .trailing)
                 .font(.body)
         }
         .animation(.easeInOut, value: content)
