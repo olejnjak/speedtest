@@ -3,7 +3,7 @@ public struct Server {
 }
 
 public struct FetchServersError: Error {
-
+    public init() { }
 }
 
 public protocol FetchServersUseCase {

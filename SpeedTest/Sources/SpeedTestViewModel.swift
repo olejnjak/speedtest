@@ -46,7 +46,7 @@ extension SpeedTestViewModel {
 func createSpeedTestViewModel(
     fetchServersUseCase: FetchServersUseCase,
     selectServerUseCase: SelectServerUseCase,
-    speedTestUseCase: any PerformDownloadSpeedTestUseCase
+    speedTestUseCase: PerformDownloadSpeedTestUseCase
 ) -> SpeedTestViewModel {
     SpeedTestViewModelImpl(
         fetchServersUseCase: fetchServersUseCase,
@@ -67,14 +67,14 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
 
     private let fetchServersUseCase: FetchServersUseCase
     private let selectServerUseCase: SelectServerUseCase
-    private let speedTestUseCase: any PerformDownloadSpeedTestUseCase
+    private let speedTestUseCase: PerformDownloadSpeedTestUseCase
 
     // MARK: - Initializers
 
     init(
         fetchServersUseCase: FetchServersUseCase,
         selectServersUseCase: SelectServerUseCase,
-        speedTestUseCase: any PerformDownloadSpeedTestUseCase
+        speedTestUseCase: PerformDownloadSpeedTestUseCase
     ) {
         self.fetchServersUseCase = fetchServersUseCase
         self.selectServerUseCase = selectServersUseCase
@@ -91,17 +91,21 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
         Task {
             defer { isTestRunning = false }
 
-            let servers = try await fetchServersUseCase()
-            let serverResult = try await selectServerUseCase(servers)
+            do {
+                let servers = try await fetchServersUseCase()
+                let serverResult = try await selectServerUseCase(servers)
 
-            server = .string(serverResult.server.name)
-            ping = .string(String(serverResult.ping)) // TODO: Correct time formatting
+                server = .string(serverResult.server.name)
+                ping = .string(String(serverResult.ping)) // TODO: Correct time formatting
 
-            for try await speed in speedTestUseCase(serverResult.server) {
-                updateSpeedResult(speed)
+                for try await speed in speedTestUseCase(serverResult.server) {
+                    updateSpeedResult(speed)
+                }
+            } catch {
+                // TODO: Concrete errors
+                server = .none
+                ping = .none
             }
-
-            // TODO: Errors
         }
     }
 
@@ -114,7 +118,7 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
 
     // MARK: - Private helpers
 
-    private func updateSpeedResult(_ speedResult: SpeedResult) {
+    private func updateSpeedResult(_ speedResult: Result<SpeedResult, DownloadSpeedTestError>) {
         // TODO: Implement
     }
 }
