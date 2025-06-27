@@ -10,15 +10,23 @@ public struct StartStopButton: View {
             case .stop: SpeedTestUIStrings.stop
             }
         }
+
+        @discardableResult
+        public mutating func toggle() -> State {
+            switch self {
+            case .start: self = .stop
+            case .stop: self = .start
+            }
+
+            return self
+        }
     }
 
     public let state: State
-    public let action: (State) -> Void
+    public let action: () -> Void
 
     public var body: some View {
-        Button {
-            action(state)
-        } label: {
+        Button(action: action) {
             Text(state.title.uppercased())
                 .font(.callout)
                 .bold()
@@ -36,7 +44,7 @@ public struct StartStopButton: View {
 
     public init(
         state: State,
-        action: @escaping (State) -> Void
+        action: @escaping () -> Void
     ) {
         self.state = state
         self.action = action
@@ -68,7 +76,7 @@ public struct StartStopButton: View {
     @Previewable @State var state = StartStopButton.State.start
 
     StartStopButton(state: state) {
-        state = $0 == .start ? .stop : .start
+        state.toggle()
     }
     .padding()
 }

@@ -2,6 +2,8 @@ import SpeedTestUI
 import SwiftUI
 
 struct SpeedTestView: View {
+    @State var viewModel: SpeedTestViewModel
+
     var body: some View {
         VStack(spacing: 16) {
             Text("Ubiquity Speed Test")
@@ -9,33 +11,43 @@ struct SpeedTestView: View {
                 .bold()
 
             VStack {
-                TachoView(speed: 100, maxSpeed: 1000)
+                TachoView(
+                    speed: viewModel.speed,
+                    maxSpeed: viewModel.maxSpeed
+                )
 
                 ZStack {
                     HStack {
                         Text("0")
                         Spacer()
-                        Text("1 Gbps")
+                        Text(String(viewModel.maxSpeed) + " Mbps") // TODO: Formatting
                     }
 
-                    Text("100 Mbps")
+                    Text(String(viewModel.speed) + " Mbps") // TODO: Formatting
                 }
                 .padding(.horizontal)
             }
             .frame(maxHeight: .infinity)
 
-            InfoRow(title: SpeedTestStrings.server, content: .none)
-            InfoRow(title: SpeedTestStrings.ping, content: .none)
-                .padding(.bottom, 32)
+            InfoRow(
+                title: SpeedTestStrings.server,
+                content: viewModel.server
+            )
+            InfoRow(
+                title: SpeedTestStrings.ping,
+                content: viewModel.ping
+            )
+            .padding(.bottom, 32)
 
-            StartStopButton(state: .start) { _ in
-                // TODO: Implement
-            }
+            StartStopButton(
+                state: viewModel.startStopState,
+                action: viewModel.toggleTest
+            )
         }
         .padding()
     }
 }
 
 #Preview {
-    SpeedTestView()
+    SpeedTestView(viewModel: MockSpeedTestViewModel())
 }

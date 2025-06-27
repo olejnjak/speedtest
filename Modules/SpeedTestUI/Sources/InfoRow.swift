@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct InfoRow: View {
-    public enum Content {
+    public enum Content: Equatable {
         case none, loading, string(String)
     }
 
@@ -19,6 +19,7 @@ public struct InfoRow: View {
             content
                 .font(.body)
         }
+        .animation(.easeInOut, value: content)
     }
 
     // MARK: - Initializers

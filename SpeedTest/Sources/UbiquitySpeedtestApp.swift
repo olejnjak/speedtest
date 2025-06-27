@@ -4,7 +4,7 @@ import SwiftUI
 struct UbiquitySpeedtestApp: App {
     var body: some Scene {
         WindowGroup {
-            SpeedTestView()
+            SpeedTestView(viewModel: createSpeedTestViewModel())
         }
     }
 }
