@@ -2,8 +2,10 @@ public struct SpeedResult {
 
 }
 
-public protocol PerformDownloadSpeedTestUseCase {
-    associatedtype PartialResultSequence: AsyncSequence where PartialResultSequence.Element == SpeedResult
+public struct DownloadSpeedTestError: Error {
 
-    func callAsFunction(_ server: Server) -> PartialResultSequence
+}
+
+public protocol PerformDownloadSpeedTestUseCase {
+    func callAsFunction(_ server: Server) -> AsyncThrowingStream<SpeedResult, DownloadSpeedTestError>
 }

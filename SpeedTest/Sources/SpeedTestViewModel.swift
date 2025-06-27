@@ -1,3 +1,4 @@
+import CoreInterface
 import Observation
 import SpeedTestUI
 
@@ -42,8 +43,16 @@ extension SpeedTestViewModel {
     }
 }
 
-func createSpeedTestViewModel() -> SpeedTestViewModel {
-    SpeedTestViewModelImpl()
+func createSpeedTestViewModel(
+    fetchServersUseCase: FetchServersUseCase,
+    selectServerUseCase: SelectServerUseCase,
+    speedTestUseCase: any PerformDownloadSpeedTestUseCase
+) -> SpeedTestViewModel {
+    SpeedTestViewModelImpl(
+        fetchServersUseCase: fetchServersUseCase,
+        selectServersUseCase: selectServerUseCase,
+        speedTestUseCase: speedTestUseCase
+    )
 }
 
 @Observable
@@ -56,11 +65,44 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
 
     private(set) var isTestRunning: Bool = false
 
+    private let fetchServersUseCase: FetchServersUseCase
+    private let selectServerUseCase: SelectServerUseCase
+    private let speedTestUseCase: any PerformDownloadSpeedTestUseCase
+
+    // MARK: - Initializers
+
+    init(
+        fetchServersUseCase: FetchServersUseCase,
+        selectServersUseCase: SelectServerUseCase,
+        speedTestUseCase: any PerformDownloadSpeedTestUseCase
+    ) {
+        self.fetchServersUseCase = fetchServersUseCase
+        self.selectServerUseCase = selectServersUseCase
+        self.speedTestUseCase = speedTestUseCase
+    }
+
+    // MARK: - Actions
+
     func startTest() {
-        // TODO: Real implementation
         isTestRunning = true
         server = .loading
         ping = .loading
+
+        Task {
+            defer { isTestRunning = false }
+
+            let servers = try await fetchServersUseCase()
+            let serverResult = try await selectServerUseCase(servers)
+
+            server = .string(serverResult.server.name)
+            ping = .string(String(serverResult.ping)) // TODO: Correct time formatting
+
+            for try await speed in speedTestUseCase(serverResult.server) {
+                updateSpeedResult(speed)
+            }
+
+            // TODO: Errors
+        }
     }
 
     func stopTest() {
@@ -68,5 +110,11 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
         isTestRunning = false
         server = .none
         ping = .none
+    }
+
+    // MARK: - Private helpers
+
+    private func updateSpeedResult(_ speedResult: SpeedResult) {
+        // TODO: Implement
     }
 }

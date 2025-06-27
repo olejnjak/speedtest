@@ -1,5 +1,5 @@
 public struct Server {
-
+    public let name: String
 }
 
 public struct FetchServersError: Error {
