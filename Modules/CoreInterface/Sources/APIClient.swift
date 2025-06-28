@@ -11,6 +11,8 @@ public enum NetworkError: Error {
 public struct EmptyResponse: Decodable { }
 
 public protocol APIClient {
+    func data(from url: URL) async throws(NetworkError) -> Data
+
     func get<Result: Decodable>(
         _ url: URL,
         expectedStatusCodes: Range<Int>

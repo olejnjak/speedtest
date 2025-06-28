@@ -8,6 +8,14 @@ struct APIClientImpl: APIClient {
         .init()
     }
 
+    func data(from url: URL) async throws(NetworkError) -> Data {
+        do {
+            return try await session.data(from: url).0
+        } catch {
+            throw .network(error)
+        }
+    }
+
     func get<Result: Decodable>(
         _ url: URL,
         expectedStatusCodes: Range<Int>

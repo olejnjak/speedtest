@@ -47,15 +47,44 @@ private final actor ServersRepositoryImpl: ServersRepository {
     }
 
     func ping(_ server: Server) async throws -> TimeInterval {
-        let duration = try await clock.measure {
+        try await measure {
             try await pingRemoteDataSource.ping(server)
+        }
+    }
+
+    func download(_ server: Server, mb: Int) async throws -> TimeInterval {
+        var urlComponents = URLComponents(
+            url: server.url.appending(path: "download"),
+            resolvingAgainstBaseURL: true
+        )
+        var queryItems = urlComponents?.queryItems ?? .init()
+        queryItems.append(.init(
+            name: "size",
+            value: .init(mb * 1_000_000)
+        ))
+        urlComponents?.queryItems = queryItems
+
+        guard let url = urlComponents?.url else {
+            throw NetworkError.invalidURL(server.url.absoluteString)
+        }
+
+        return try await measure {
+            _ = try await apiClient.data(from: url)
+        }
+    }
+
+    // MARK: - Private helpers
+
+    private func measure(
+        _ action: () async throws -> Void
+    ) async rethrows -> TimeInterval {
+        let duration = try await clock.measure {
+            try await action()
         }
 
         let (seconds, attoSeconds) = duration.components
         return .init(.init(seconds) + Double(attoSeconds) / 1_000_000_000_000_000_000)
     }
-
-    // MARK: - Private helpers
 
     private func tokens() async throws(NetworkError) -> String {
         let start = clock.now
