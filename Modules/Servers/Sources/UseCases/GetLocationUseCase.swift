@@ -2,7 +2,7 @@ import CoreLocation
 import OSLog
 
 protocol GetLocationUseCase {
-    func callAsFunction() async -> CLLocationCoordinate2D?
+    func callAsFunction() async -> CLLocation?
 }
 
 @MainActor
@@ -13,7 +13,7 @@ func createGetLocationUseCase() -> GetLocationUseCase {
 @MainActor
 private final class GetLocationUseCaseImpl: NSObject, GetLocationUseCase, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
-    private var continuations = [UnsafeContinuation<CLLocationCoordinate2D?, Never>]()
+    private var continuations = [UnsafeContinuation<CLLocation?, Never>]()
 
     // MARK: - Initializers
 
@@ -25,7 +25,7 @@ private final class GetLocationUseCaseImpl: NSObject, GetLocationUseCase, CLLoca
 
     // MARK: - Actions
 
-    func callAsFunction() async -> CLLocationCoordinate2D? {
+    func callAsFunction() async -> CLLocation? {
         await withUnsafeContinuation { continuation in
             locationManager.delegate = self
 
@@ -89,7 +89,7 @@ private final class GetLocationUseCaseImpl: NSObject, GetLocationUseCase, CLLoca
     private func updateLocations(_ location: CLLocation?) {
         while continuations.isEmpty == false {
             let continuation = continuations.removeFirst()
-            continuation.resume(returning: location?.coordinate)
+            continuation.resume(returning: location)
         }
     }
 }

@@ -10,7 +10,10 @@ extension AppDependency {
         PerformDownloadSpeedTestUseCaseImpl()
     }
 
+    @MainActor
     var selectServerUseCase: SelectServerUseCase {
-        createSelectServerUseCase()
+        createSelectServerUseCase(
+            serversRepository: serversRepository
+        )
     }
 }

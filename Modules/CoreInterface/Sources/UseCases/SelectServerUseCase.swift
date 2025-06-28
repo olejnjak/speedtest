@@ -5,6 +5,7 @@ public enum SelectServerError: Error {
     case noServersProvided
     /// Unable to get location of phone
     case unableToGetLocation
+    case unableToPingAnyServer
 }
 
 public struct SelectServerResult {

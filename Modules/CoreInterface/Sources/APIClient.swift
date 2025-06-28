@@ -7,6 +7,8 @@ public enum NetworkError: Error {
     case unexpectedStatusCode(got: Int?, expected: Range<Int>)
 }
 
+public struct EmptyResponse: Decodable { }
+
 public protocol APIClient {
     func get<Result: Decodable>(
         _ url: URL,
