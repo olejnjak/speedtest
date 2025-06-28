@@ -6,15 +6,34 @@ public func createServersRepository(
 ) -> ServersRepository {
     ServersRepositoryImpl(
         apiClient: apiClient,
-        pingRemoteDataSource: createHTTPPingRemoteDataSource(apiClient: apiClient)
+        pingRemoteDataSource: createHTTPPingRemoteDataSource(apiClient: apiClient),
+        serversRepositoryLocalDataSource: createServersRepositoryLocalDataSource()
     )
 }
 
-private struct ServersRepositoryImpl: ServersRepository {
+private final actor ServersRepositoryImpl: ServersRepository {
+    private enum Constants {
+        static let tokenExpirationTreshold = Duration.seconds(30)
+    }
+
     let apiClient: APIClient
     let pingRemoteDataSource: PingRemoteDataSource
-    let serverMapper = ServerMapper()
-    var clock: any Clock<Duration> = ContinuousClock()
+    let serversRepositoryLocalDataSource: ServersRepositoryLocalDataSource
+    let clock = ContinuousClock()
+
+    private let serverMapper = ServerMapper()
+
+    // MARK: - Initializers
+
+    init(
+        apiClient: APIClient,
+        pingRemoteDataSource: PingRemoteDataSource,
+        serversRepositoryLocalDataSource: ServersRepositoryLocalDataSource
+    ) {
+        self.apiClient = apiClient
+        self.pingRemoteDataSource = pingRemoteDataSource
+        self.serversRepositoryLocalDataSource = serversRepositoryLocalDataSource
+    }
 
     // MARK: - Actions
 
@@ -34,5 +53,48 @@ private struct ServersRepositoryImpl: ServersRepository {
 
         let (seconds, attoSeconds) = duration.components
         return .init(.init(seconds) + Double(attoSeconds) / 1_000_000_000_000_000_000)
+    }
+
+    // MARK: - Private helpers
+
+    private func tokens() async throws(NetworkError) -> String {
+        let start = clock.now
+
+        if let currentToken = currentToken() {
+            return currentToken
+        }
+
+        let tokensResponse = try await apiClient.post(
+            "https://sp-dir.uwn.com/api/v1/tokens",
+            result: TokensResponse.self
+        )
+
+        serversRepositoryLocalDataSource.token = .init(
+            token: tokensResponse.token,
+            expiration: start.advanced(by: .seconds(tokensResponse.ttl))
+        )
+
+        return tokensResponse.token
+    }
+
+    private func currentToken() -> String? {
+        guard let currentToken = serversRepositoryLocalDataSource.token else {
+            return nil
+        }
+
+        let ttl = clock.now.duration(to: currentToken.expiration)
+
+        if ttl > Constants.tokenExpirationTreshold {
+            return currentToken.token
+        }
+
+        serversRepositoryLocalDataSource.token = nil
+
+        return nil
+    }
+
+    private struct TokensResponse: Decodable {
+        let token: String
+        let ttl: Int
     }
 }
