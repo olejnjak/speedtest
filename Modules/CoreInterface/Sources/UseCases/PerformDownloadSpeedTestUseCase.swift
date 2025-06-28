@@ -1,5 +1,9 @@
 public struct SpeedResult {
+    public let speed: Double
 
+    public init(speed: Double) {
+        self.speed = speed
+    }
 }
 
 public struct DownloadSpeedTestError: Error {

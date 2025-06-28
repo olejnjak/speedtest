@@ -8,4 +8,9 @@ public extension Logger {
         subsystem: subsystem,
         category: "Location"
     )
+
+    static let speedTest = Logger(
+        subsystem: subsystem,
+        category: "SpeedTest"
+    )
 }

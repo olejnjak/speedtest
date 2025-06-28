@@ -1,5 +1,6 @@
 import CoreInterface
 import Observation
+import OSLog
 import SpeedTestUI
 
 struct PresentableError: Identifiable {
@@ -66,8 +67,8 @@ func createSpeedTestViewModel(
 
 @Observable
 private final class SpeedTestViewModelImpl: SpeedTestViewModel {
-    let speed: Double = 100
-    let maxSpeed: Double = 1000
+    private(set) var speed: Double = 100
+    private(set) var maxSpeed: Double = 1000
 
     var error: PresentableError?
 
@@ -135,6 +136,13 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
     // MARK: - Private helpers
 
     private func updateSpeedResult(_ speedResult: Result<SpeedResult, DownloadSpeedTestError>) {
-        // TODO: Implement
+        switch speedResult {
+        case .success(let result):
+            speed = result.speed
+            // TODO: Calculate average speed
+        case .failure(let error):
+            Logger.speedTest.error("Got speed test result failure: \(error)")
+            // TODO: Handle error
+        }
     }
 }
