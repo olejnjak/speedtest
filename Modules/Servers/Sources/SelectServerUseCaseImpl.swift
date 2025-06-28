@@ -1,13 +1,35 @@
 import CoreInterface
+import CoreLocation
 
+@MainActor
 public func createSelectServerUseCase() -> SelectServerUseCase {
-    SelectServerUseCaseImpl()
+    SelectServerUseCaseImpl(
+        getLocationUseCase: createGetLocationUseCase()
+    )
 }
 
 private struct SelectServerUseCaseImpl: SelectServerUseCase {
-    func callAsFunction(_ servers: [Server]) async throws(SelectServerError) -> SelectServerResult {
+    private let getLocationUseCase: GetLocationUseCase
+
+    // MARK: - Initializers
+
+    init(
+        getLocationUseCase: GetLocationUseCase
+    ) {
+        self.getLocationUseCase = getLocationUseCase
+    }
+
+    // MARK: - Actions
+
+    func callAsFunction(
+        _ servers: [Server]
+    ) async throws(SelectServerError) -> SelectServerResult {
         guard servers.isEmpty == false else {
-            throw SelectServerError.noServersProvided
+            throw .noServersProvided
+        }
+
+        guard let location = await getLocationUseCase() else {
+            throw .unableToGetLocation
         }
 
         // TODO: Real implementation

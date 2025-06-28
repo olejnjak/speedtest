@@ -30,11 +30,11 @@ struct SpeedTestView: View {
             .frame(maxHeight: .infinity)
 
             InfoRow(
-                title: SpeedTestStrings.server,
+                title: SpeedTestStrings.Localizable.server,
                 content: viewModel.server
             )
             InfoRow(
-                title: SpeedTestStrings.ping,
+                title: SpeedTestStrings.Localizable.ping,
                 content: viewModel.ping
             )
             .padding(.bottom, 32)
@@ -46,7 +46,10 @@ struct SpeedTestView: View {
         }
         .padding()
         .alert(item: $viewModel.error) { error in
-            Alert(title: Text("Error"))
+            Alert(
+                title: Text(error.title),
+                message: Text(error.message)
+            )
         }
     }
 }

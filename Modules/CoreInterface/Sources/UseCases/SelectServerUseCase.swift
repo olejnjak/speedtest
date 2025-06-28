@@ -3,6 +3,8 @@ import Foundation
 public enum SelectServerError: Error {
     /// List of servers is empty
     case noServersProvided
+    /// Unable to get location of phone
+    case unableToGetLocation
 }
 
 public struct SelectServerResult {
