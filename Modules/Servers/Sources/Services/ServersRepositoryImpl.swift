@@ -6,7 +6,8 @@ public func createServersRepository(
 ) -> ServersRepository {
     ServersRepositoryImpl(
         apiClient: apiClient,
-        pingRemoteDataSource: createHTTPPingRemoteDataSource(apiClient: apiClient),
+//        pingRemoteDataSource: createHTTPPingRemoteDataSource(apiClient: apiClient),
+        pingRemoteDataSource: createICMPPingRemoteDataSource(),
         serversRepositoryLocalDataSource: createServersRepositoryLocalDataSource()
     )
 }
@@ -65,6 +66,10 @@ private final actor ServersRepositoryImpl: ServersRepository {
         queryItems.append(.init(
             name: "token",
             value: try await tokens()
+        ))
+        queryItems.append(.init(
+            name: "nc",
+            value: .init(UUID().uuidString.replacingOccurrences(of: "-", with: "").prefix(7))
         ))
         urlComponents?.queryItems = queryItems
 

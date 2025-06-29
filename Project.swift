@@ -3,6 +3,12 @@ import ProjectDescriptionHelpers
 
 let project = Project(
     name: "UbiquitySpeedTest",
+    packages: [
+        .remote(
+            url: "https://github.com/LebJe/ICMPPing",
+            requirement: .upToNextMajor(from: "0.0.1")
+        )
+    ],
     settings: .settings(base: [
         "EAGER_LINKING": true,
         "ENABLE_USER_SCRIPT_SANDBOXING": true,
@@ -34,6 +40,7 @@ let project = Project(
             name: "Servers",
             dependencies: [
                 .target(name: "CoreInterface"),
+                .package(product: "ICMPPing"),
             ]
         ),
     ]

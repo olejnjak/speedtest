@@ -2,7 +2,7 @@ import CoreInterface
 import Foundation
 
 struct APIClientImpl: APIClient {
-    var session = URLSession.shared
+    var session = URLSession(configuration: .ephemeral)
 
     private var jsonDecoder: JSONDecoder {
         .init()

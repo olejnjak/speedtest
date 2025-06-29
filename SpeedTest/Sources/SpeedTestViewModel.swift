@@ -11,8 +11,9 @@ struct PresentableError: Identifiable {
 }
 
 protocol SpeedTestViewModel {
-    var speed: Double { get }
-    var maxSpeed: Double { get }
+    var speedText: String { get }
+    var maxSpeedText: String { get }
+    var speedProgress: Progress { get }
 
     var server: InfoRow.Content { get }
     var ping: InfoRow.Content { get }
@@ -25,9 +26,10 @@ protocol SpeedTestViewModel {
 }
 
 final class MockSpeedTestViewModel: SpeedTestViewModel {
-    var speed: Double = 100
-    var maxSpeed: Double = 1000
-    
+    var speedText = "0 Mbps"
+    var maxSpeedText = "1 Gbps"
+    var speedProgress = Progress(totalUnitCount: 1000)
+
     var server: InfoRow.Content = .none
     var ping: InfoRow.Content = .none
     
@@ -67,8 +69,19 @@ func createSpeedTestViewModel(
 
 @Observable
 private final class SpeedTestViewModelImpl: SpeedTestViewModel {
-    private(set) var speed: Double = 100
-    private(set) var maxSpeed: Double = 1000
+    var speedText: String { speedFormatter.speedString(speed) }
+    var maxSpeedText: String { speedFormatter.maxSpeedString(maxSpeed) }
+
+    var speedProgress: Progress {
+        .init(
+            totalUnitCount: .init(maxSpeed),
+            completedUnitCount: .init(speed)
+        )
+    }
+
+    private var speed: Double = 0
+    private var numberOfPartialResults = 0
+    private var maxSpeed: Double = 1000
 
     var error: PresentableError?
 
@@ -77,6 +90,7 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
 
     private(set) var isTestRunning: Bool = false
 
+    private let speedFormatter = SpeedFormatter()
     private let fetchServersUseCase: FetchServersUseCase
     private let selectServerUseCase: SelectServerUseCase
     private let speedTestUseCase: PerformDownloadSpeedTestUseCase
@@ -99,6 +113,7 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
         isTestRunning = true
         server = .loading
         ping = .loading
+        numberOfPartialResults = 0
 
         Task {
             defer { isTestRunning = false }
@@ -108,7 +123,8 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
                 let serverResult = try await selectServerUseCase(servers)
 
                 server = .string(serverResult.server.name)
-                ping = .string(String(serverResult.ping)) // TODO: Correct time formatting
+                ping = .string(String(format: "%.2f ms", serverResult.ping * 1000))
+                maxSpeed = .init(serverResult.server.maxMbps)
 
                 for try await speed in speedTestUseCase(serverResult.server) {
                     updateSpeedResult(speed)
@@ -138,8 +154,9 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
     private func updateSpeedResult(_ speedResult: Result<SpeedResult, DownloadSpeedTestError>) {
         switch speedResult {
         case .success(let result):
-            speed = result.speed
-            // TODO: Calculate average speed
+            let numberOfPartialResultsDouble = Double(numberOfPartialResults)
+            speed = (speed * numberOfPartialResultsDouble + result.speed) / (numberOfPartialResultsDouble + 1)
+            numberOfPartialResults += 1
         case .failure(let error):
             Logger.speedTest.error("Got speed test result failure: \(error)")
             // TODO: Handle error

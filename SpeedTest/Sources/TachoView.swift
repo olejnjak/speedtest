@@ -48,12 +48,7 @@ struct Needle: Shape {
 }
 
 struct TachoView: View {
-    let speed: Double
-    let maxSpeed: Double
-
-    private var progress: Progress {
-        .init(totalUnitCount: .init(maxSpeed), completedUnitCount: .init(speed))
-    }
+    let progress: Progress
 
     var body: some View {
         ZStack {
@@ -67,7 +62,7 @@ struct TachoView: View {
                 .fill(Color.red)
                 .rotationEffect(.degrees(180 * progress.fractionCompleted), anchor: .bottom)
         }
-        .animation(.linear, value: speed)
+        .animation(.linear, value: progress)
         .aspectRatio(2, contentMode: .fit)
         .padding()
     }
@@ -76,7 +71,7 @@ struct TachoView: View {
 #Preview(traits: .sizeThatFitsLayout) {
     @Previewable @State var speed: Double = 0
 
-    TachoView(speed: speed, maxSpeed: 1000)
+    TachoView(progress: .init(totalUnitCount: 1000, completedUnitCount: .init(speed)))
         .frame(width: 200, height: 100)
         .task {
             while true {
@@ -93,7 +88,7 @@ struct TachoView: View {
         }
 }
 
-private extension Progress {
+extension Progress {
     convenience init(totalUnitCount: Int64, completedUnitCount: Int64) {
         self.init(totalUnitCount: totalUnitCount)
         self.completedUnitCount = completedUnitCount

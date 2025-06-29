@@ -11,19 +11,21 @@ struct SpeedTestView: View {
                 .bold()
 
             VStack {
-                TachoView(
-                    speed: viewModel.speed,
-                    maxSpeed: viewModel.maxSpeed
-                )
+                TachoView(progress: viewModel.speedProgress)
 
-                ZStack {
+                ZStack(alignment: .top) {
                     HStack {
                         Text("0")
                         Spacer()
-                        Text(String(viewModel.maxSpeed) + " Mbps") // TODO: Formatting
+                        Text(viewModel.maxSpeedText)
                     }
 
-                    Text(String(viewModel.speed) + " Mbps") // TODO: Formatting
+                    VStack {
+                        Text(viewModel.speedText)
+
+                        ProgressView()
+                            .opacity(viewModel.isTestRunning ? 1 : 0)
+                    }
                 }
                 .padding(.horizontal)
             }

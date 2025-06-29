@@ -8,7 +8,8 @@ struct ServerMapper {
             location: .init(
                 latitude: apiServer.latitude,
                 longitude: apiServer.longitude
-            )
+            ),
+            maxMbps: apiServer.speedMbps
         )
     }
 
