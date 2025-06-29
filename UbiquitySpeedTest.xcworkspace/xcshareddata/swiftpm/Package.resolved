@@ -1,0 +1,15 @@
+{
+  "originHash" : "6918ad3578692679fa2f3aa3c6227f94a5eac8968fdc2a5f6bb14c791ac8cf2c",
+  "pins" : [
+    {
+      "identity" : "icmpping",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LebJe/ICMPPing",
+      "state" : {
+        "revision" : "4032d9c386de7fbfc59c4c00e9437664453fac76",
+        "version" : "0.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}
