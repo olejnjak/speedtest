@@ -6,9 +6,10 @@ struct SpeedTestView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Text("Ubiquity Speed Test")
+            Text(SpeedTestStrings.Localizable.title)
                 .font(.title)
                 .bold()
+                .foregroundStyle(SpeedTestUIAsset.Colors.foregroundSecondary.swiftUIColor)
 
             VStack {
                 TachoView(progress: viewModel.speedProgress)
@@ -28,6 +29,7 @@ struct SpeedTestView: View {
                     }
                 }
                 .padding(.horizontal)
+                .foregroundStyle(SpeedTestUIAsset.Colors.foregroundSecondary.swiftUIColor)
             }
             .frame(maxHeight: .infinity)
 

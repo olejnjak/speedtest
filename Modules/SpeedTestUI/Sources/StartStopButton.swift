@@ -33,7 +33,7 @@ public struct StartStopButton: View {
                 .foregroundStyle(SpeedTestUIAsset.Colors.foregroundSecondary.swiftUIColor)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(foregroundStyle())
+                .background(backgroundStyle())
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         }
         .buttonStyle(.plain)
@@ -52,7 +52,7 @@ public struct StartStopButton: View {
 
     // MARK: - Private helpers
 
-    private func foregroundStyle() -> some ShapeStyle {
+    private func backgroundStyle() -> some ShapeStyle {
         let colors = switch state {
         case .start: [
             SpeedTestUIAsset.Colors.start1.swiftUIColor,
