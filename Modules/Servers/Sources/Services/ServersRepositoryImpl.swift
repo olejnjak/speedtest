@@ -62,6 +62,10 @@ private final actor ServersRepositoryImpl: ServersRepository {
             name: "size",
             value: .init(mb * 1_000_000)
         ))
+        queryItems.append(.init(
+            name: "token",
+            value: try await tokens()
+        ))
         urlComponents?.queryItems = queryItems
 
         guard let url = urlComponents?.url else {

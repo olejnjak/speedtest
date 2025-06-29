@@ -7,7 +7,7 @@ extension AppDependency {
     }
 
     var performDownloadSpeedTestUseCase: PerformDownloadSpeedTestUseCase {
-        PerformDownloadSpeedTestUseCaseImpl()
+        PerformDownloadSpeedTestUseCaseImpl(serversRepository: serversRepository)
     }
 
     @MainActor

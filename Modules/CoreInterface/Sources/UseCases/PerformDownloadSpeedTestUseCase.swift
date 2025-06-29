@@ -7,7 +7,7 @@ public struct SpeedResult {
 }
 
 public struct DownloadSpeedTestError: Error {
-
+    public init() { }
 }
 
 public protocol PerformDownloadSpeedTestUseCase {

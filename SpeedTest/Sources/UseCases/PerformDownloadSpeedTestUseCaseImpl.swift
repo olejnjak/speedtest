@@ -1,13 +1,35 @@
 import CoreInterface
 
 struct PerformDownloadSpeedTestUseCaseImpl: PerformDownloadSpeedTestUseCase {
-    func callAsFunction(_ server: Server) -> AsyncStream<Result<SpeedResult, DownloadSpeedTestError>> {
+    private enum Constants {
+        static let maxTestDuration = 15
+        static let fileSizeMB = 50
+    }
+
+    let serversRepository: ServersRepository
+
+    private let clock = ContinuousClock()
+
+    func callAsFunction(
+        _ server: Server
+    ) -> AsyncStream<Result<SpeedResult, DownloadSpeedTestError>> {
         .init { continuation in
             Task {
-                for i in [100, 110, 120, 90, 130] {
-                    continuation.yield(.success(.init(speed: .init(i))))
-                    try? await Task.sleep(for: .seconds(1))
+                let start = clock.now
+
+                while start.duration(to: clock.now) < .seconds(Constants.maxTestDuration) {
+                    do {
+                        let chunkTime = try await serversRepository.download(
+                            server,
+                            mb: Constants.fileSizeMB
+                        )
+                        let speedMbps = Double(Constants.fileSizeMB * 8) / chunkTime
+                        continuation.yield(.success(.init(speed: speedMbps)))
+                    } catch {
+                        continuation.yield(.failure(.init()))
+                    }
                 }
+
                 continuation.finish()
             }
         }
