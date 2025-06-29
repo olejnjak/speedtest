@@ -90,6 +90,8 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
 
     private(set) var isTestRunning: Bool = false
 
+    private var runningTestTask: Task<Void, Never>?
+
     private let speedFormatter = SpeedFormatter()
     private let fetchServersUseCase: FetchServersUseCase
     private let selectServerUseCase: SelectServerUseCase
@@ -115,24 +117,48 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
         ping = .loading
         numberOfPartialResults = 0
 
-        Task {
+        runningTestTask = Task {
             defer { isTestRunning = false }
+
+            struct Cancelled: Error {
+
+            }
+
+            let cleanup = { [weak self] in
+                self?.server = .none
+                self?.ping = .none
+            }
 
             do {
                 let servers = try await fetchServersUseCase()
+
+                if Task.isCancelled {
+                    throw Cancelled()
+                }
+
                 let serverResult = try await selectServerUseCase(servers)
+
+                if Task.isCancelled {
+                    throw Cancelled()
+                }
 
                 server = .string(serverResult.server.name)
                 ping = .string(String(format: "%.2f ms", serverResult.ping * 1000))
                 maxSpeed = .init(serverResult.server.maxMbps)
 
                 for try await speed in speedTestUseCase(serverResult.server) {
+                    if Task.isCancelled {
+                        throw Cancelled()
+                    }
+
                     updateSpeedResult(speed)
                 }
+            } catch is Cancelled {
+                speed = 0
+                cleanup()
             } catch {
                 // TODO: Concrete errors
-                server = .none
-                ping = .none
+                cleanup()
 
                 self.error = .init(
                     title: "Error",
@@ -143,7 +169,9 @@ private final class SpeedTestViewModelImpl: SpeedTestViewModel {
     }
 
     func stopTest() {
-        // TODO: Real implementation
+        runningTestTask?.cancel()
+        runningTestTask = nil
+
         isTestRunning = false
         server = .none
         ping = .none

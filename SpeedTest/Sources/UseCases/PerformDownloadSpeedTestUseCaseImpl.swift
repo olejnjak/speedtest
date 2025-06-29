@@ -3,7 +3,7 @@ import CoreInterface
 struct PerformDownloadSpeedTestUseCaseImpl: PerformDownloadSpeedTestUseCase {
     private enum Constants {
         static let maxTestDuration = 15
-        static let fileSizeMB = 50
+        static let fileSizeMB = 5
     }
 
     let serversRepository: ServersRepository
