@@ -3,12 +3,6 @@ import ProjectDescriptionHelpers
 
 let project = Project(
     name: "UbiquitySpeedTest",
-    packages: [
-        .remote(
-            url: "https://github.com/LebJe/ICMPPing",
-            requirement: .upToNextMajor(from: "0.0.1")
-        )
-    ],
     settings: .settings(base: [
         "EAGER_LINKING": true,
         "ENABLE_USER_SCRIPT_SANDBOXING": true,
@@ -36,11 +30,21 @@ let project = Project(
             name: "SpeedTestUI",
             hasResources: true
         ),
+        .target(
+            name: "SimplePing",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "com.example.apple-samplecode.SimplePing",
+            sources: "Modules/SimplePing/Sources/**",
+            headers: .headers(
+                public: "Modules/SimplePing/Sources/SimplePing.h"
+            )
+        ),
         .staticModule(
             name: "Servers",
             dependencies: [
                 .target(name: "CoreInterface"),
-                .package(product: "ICMPPing"),
+                .target(name: "SimplePing"),
             ]
         ),
     ]

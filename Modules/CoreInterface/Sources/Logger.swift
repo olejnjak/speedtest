@@ -13,4 +13,9 @@ public extension Logger {
         subsystem: subsystem,
         category: "SpeedTest"
     )
+
+    static let icmpPing = Logger(
+        subsystem: subsystem,
+        category: "ICMPPing"
+    )
 }

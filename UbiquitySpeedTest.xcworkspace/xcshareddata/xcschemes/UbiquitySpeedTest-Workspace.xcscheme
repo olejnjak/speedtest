@@ -42,6 +42,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CFD4E5F0D5E44A1F4A33BE59"
+               BuildableName = "SimplePing.framework"
+               BlueprintName = "SimplePing"
+               ReferencedContainer = "container:UbiquitySpeedTest.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "331DB1F92E782D4F4045016A"
                BuildableName = "SpeedTest.app"
                BlueprintName = "SpeedTest"

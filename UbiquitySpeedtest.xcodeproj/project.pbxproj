@@ -22,6 +22,8 @@
 		56FF4BEA512B4A70CF987417 /* FetchServersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FD26B3546521D552EA88 /* FetchServersUseCase.swift */; };
 		58911EC07325A363A67519DD /* FetchServersUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435919C142B11D434450A57 /* FetchServersUseCaseImpl.swift */; };
 		5AE5056751F2E008EFB666E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FF80B60306932974D1C1A199 /* Localizable.strings */; };
+		5D3FDD643FF4E6242DB19E90 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 4407F558BA432A7AACDF0269 /* SimplePing.m */; };
+		644B0A3F6F18AA1ECB244FB3 /* SimplePing.h in Headers */ = {isa = PBXBuildFile; fileRef = 885C7D0CD4F919FFA0608BA7 /* SimplePing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67788D48C2E8D4FFB11231D0 /* SelectServerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5617A8D2E8D33912CFD25AC /* SelectServerUseCase.swift */; };
 		692F7B5DD80DC3B31F51A04A /* SpeedTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2C167B5B83372E5136E6D1 /* SpeedTestViewModel.swift */; };
 		731701A8BD32CF816BA69A2A /* GetLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81150FADE2D2AD790779F231 /* GetLocationUseCase.swift */; };
@@ -33,6 +35,7 @@
 		9A24F9A6E85BC8540490A785 /* TuistAssets+SpeedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D492CEBE0BCAF6A72BC981 /* TuistAssets+SpeedTest.swift */; };
 		9E43111A2E0319F69EA63295 /* TuistStrings+SpeedTestUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9968FF7716E7EF8BA107B27 /* TuistStrings+SpeedTestUI.swift */; };
 		A12F33AD54385D327D2C39FC /* CoreInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071FB4BA5C114B55A1345D5 /* CoreInterface.framework */; };
+		A25CAD340E60C929A6935F60 /* SimplePing.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = 7BEBBC39B099994A011DBEB3 /* SimplePing.framework */; };
 		A3721A4928425B8267788414 /* ServersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A193751540290502DC36D /* ServersRepository.swift */; };
 		A802038D73D47D24F11F8B9E /* APIClientImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15310BA909A414F30A987030 /* APIClientImpl.swift */; };
 		AA71761CA78890ED580E7064 /* ICMPPingRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AE3F95A58D62544E79379E /* ICMPPingRemoteDataSource.swift */; };
@@ -42,6 +45,7 @@
 		B0E92CFD7D33EECEA03A9EC7 /* ServersRepositoryLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0937192C85E56B934F787A6 /* ServersRepositoryLocalDataSource.swift */; };
 		BBC123B59FC0D019F5CC7107 /* TuistStrings+SpeedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E98BED2E99FD858536CF36C /* TuistStrings+SpeedTest.swift */; };
 		BD3F57EC0D6B41B19E8675CC /* HTTPPingRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCFFED370EB913CEB27F4AF /* HTTPPingRemoteDataSource.swift */; };
+		C44A2E5215F8E4E594EC2248 /* SimplePing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEBBC39B099994A011DBEB3 /* SimplePing.framework */; };
 		CC5C364108FD21E39BC46B97 /* FetchServersError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6D20BD64DAA9DA15B886F7 /* FetchServersError.swift */; };
 		DDAC5E1B1994CFA032DEF8D5 /* TuistAssets+SpeedTestUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254ECD4206DC2287D73BBA27 /* TuistAssets+SpeedTestUI.swift */; };
 		DF592E895110337AE20DDF29 /* StartStopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C51DBD5D68660ED1568EE2 /* StartStopButton.swift */; };
@@ -51,7 +55,6 @@
 		F1E58CEE97CCEB177FF0FD48 /* AppDependency+UseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9816DEE1B8B3728D14A9C6DB /* AppDependency+UseCases.swift */; };
 		F517496453595D9E8847B83B /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B89175D5EBB4620FF53147 /* APIClient.swift */; };
 		F6DFB0E0BFED85B5AD219D30 /* SpeedFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF584C87CBD1DF00EC5031C /* SpeedFormatter.swift */; };
-		F839FC7E245DC17923C26923 /* ICMPPing in Frameworks */ = {isa = PBXBuildFile; productRef = E7DE3DAFFC287F76C7851DB1 /* ICMPPing */; };
 		FBFFB591E1D7A603ACE7D1AD /* InfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB88BFD42B3E3E2B01307E1 /* InfoRow.swift */; };
 		FDE24259B606C04646F34E3F /* PerformDownloadSpeedTestUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C0769157D534D0486ADD52 /* PerformDownloadSpeedTestUseCase.swift */; };
 /* End PBXBuildFile section */
@@ -85,9 +88,26 @@
 			remoteGlobalIDString = 4D45066B345CF05C6741B28E;
 			remoteInfo = SpeedTestUI;
 		};
+		DD65346AD0F433161498293C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A229A2EBCA8138063063B882 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFD4E5F0D5E44A1F4A33BE59;
+			remoteInfo = SimplePing;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		1CE007ABAEF6903BFD826C45 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5E16D86F3FB934C9256E83E3 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -120,6 +140,16 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AE355495C9532023267FD62C /* Dependencies */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstSubfolderSpec = 16;
+			files = (
+				A25CAD340E60C929A6935F60 /* SimplePing.framework in Dependencies */,
+			);
+			name = Dependencies;
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		EEB6F6D6004779156BD865D7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -147,7 +177,9 @@
 		2DA90140BB9A592395D8CBAA /* ServerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMapper.swift; sourceTree = "<group>"; };
 		34CA8E3BB983460D047933BB /* Servers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Servers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA872A585E42E00829F2447 /* PingRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingRemoteDataSource.swift; sourceTree = "<group>"; };
+		4407F558BA432A7AACDF0269 /* SimplePing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
 		56D492CEBE0BCAF6A72BC981 /* TuistAssets+SpeedTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+SpeedTest.swift"; sourceTree = "<group>"; };
+		5CC04D21EF5384EBC513D8BA /* SimplePing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SimplePing-Info.plist"; sourceTree = "<group>"; };
 		5DA4FD26B3546521D552EA88 /* FetchServersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchServersUseCase.swift; sourceTree = "<group>"; };
 		682C1D985378FFA910A795B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6E1E732B9DA476C5253F5F9F /* TuistBundle+SpeedTestUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+SpeedTestUI.swift"; sourceTree = "<group>"; };
@@ -156,7 +188,9 @@
 		75C51DBD5D68660ED1568EE2 /* StartStopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartStopButton.swift; sourceTree = "<group>"; };
 		791E025785A86F7218013BF6 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
 		7A4A193751540290502DC36D /* ServersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersRepository.swift; sourceTree = "<group>"; };
+		7BEBBC39B099994A011DBEB3 /* SimplePing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SimplePing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81150FADE2D2AD790779F231 /* GetLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocationUseCase.swift; sourceTree = "<group>"; };
+		885C7D0CD4F919FFA0608BA7 /* SimplePing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
 		8DE3D5811741202745BC04A7 /* UbiquitySpeedtestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UbiquitySpeedtestApp.swift; sourceTree = "<group>"; };
 		94C5DE33867F987872C19ED8 /* CoreInterface-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreInterface-Info.plist"; sourceTree = "<group>"; };
 		957F10BC295722239F802224 /* Servers-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Servers-Info.plist"; sourceTree = "<group>"; };
@@ -197,6 +231,7 @@
 			files = (
 				0175F89681E4452E3DFF4639 /* CoreInterface.framework in Frameworks */,
 				ED21DB7495A557A768BA5BB0 /* Servers.framework in Frameworks */,
+				C44A2E5215F8E4E594EC2248 /* SimplePing.framework in Frameworks */,
 				496F7B98AAC1C2E227F05B5D /* SpeedTestUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +241,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A12F33AD54385D327D2C39FC /* CoreInterface.framework in Frameworks */,
-				F839FC7E245DC17923C26923 /* ICMPPing in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7CF8A44F0C6EAE66106878A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +293,7 @@
 			children = (
 				94C5DE33867F987872C19ED8 /* CoreInterface-Info.plist */,
 				957F10BC295722239F802224 /* Servers-Info.plist */,
+				5CC04D21EF5384EBC513D8BA /* SimplePing-Info.plist */,
 				E14D1347534FCF5ADCDABFFB /* SpeedTest-Info.plist */,
 				2ACB8FC72319DEAF92192C34 /* SpeedTestUI-Info.plist */,
 			);
@@ -306,6 +348,15 @@
 				DA31072A611D142720010F6F /* Server.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6A9D807B84BE5BDC1E5F623A /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				885C7D0CD4F919FFA0608BA7 /* SimplePing.h */,
+				4407F558BA432A7AACDF0269 /* SimplePing.m */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		726D35462CEFD386FFC53395 = {
@@ -371,6 +422,7 @@
 			children = (
 				068FE27D97D63C4BD2CEA22B /* CoreInterface */,
 				8170279618FEAF9A082B4C71 /* Servers */,
+				B542B2997CBA7367EDA1FFAD /* SimplePing */,
 				20039D6EAB9661BD0F63FBE7 /* SpeedTestUI */,
 			);
 			path = Modules;
@@ -394,6 +446,14 @@
 				0C3C350E32E46FCEA1F755FB /* SelectServerUseCaseImpl.swift */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		B542B2997CBA7367EDA1FFAD /* SimplePing */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D807B84BE5BDC1E5F623A /* Sources */,
+			);
+			path = SimplePing;
 			sourceTree = "<group>";
 		};
 		B68C3E618C9C982E45C88381 /* Sources */ = {
@@ -431,6 +491,7 @@
 			children = (
 				0071FB4BA5C114B55A1345D5 /* CoreInterface.framework */,
 				34CA8E3BB983460D047933BB /* Servers.framework */,
+				7BEBBC39B099994A011DBEB3 /* SimplePing.framework */,
 				CA0A818B0D980ACC2477C742 /* SpeedTest.app */,
 				06DB1B6882424C8FDC8547FA /* SpeedTestUI.framework */,
 			);
@@ -468,6 +529,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		0FFFF0AC047715691B7B8FE7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644B0A3F6F18AA1ECB244FB3 /* SimplePing.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		331DB1F92E782D4F4045016A /* SpeedTest */ = {
 			isa = PBXNativeTarget;
@@ -500,15 +572,16 @@
 				C565E1182034DB39D84166F8 /* Resources */,
 				4888C7AFB5B4D2B48AF3881D /* Frameworks */,
 				5E16D86F3FB934C9256E83E3 /* Embed Frameworks */,
+				AE355495C9532023267FD62C /* Dependencies */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				5241C74D8A6D6D775A8AB927 /* PBXTargetDependency */,
+				D28E037509199B76C25FC7B0 /* PBXTargetDependency */,
 			);
 			name = Servers;
 			packageProductDependencies = (
-				E7DE3DAFFC287F76C7851DB1 /* ICMPPing */,
 			);
 			productName = Servers;
 			productReference = 34CA8E3BB983460D047933BB /* Servers.framework */;
@@ -554,6 +627,27 @@
 			productReference = 06DB1B6882424C8FDC8547FA /* SpeedTestUI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		CFD4E5F0D5E44A1F4A33BE59 /* SimplePing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D94FC1BC27B083D46EDDE80 /* Build configuration list for PBXNativeTarget "SimplePing" */;
+			buildPhases = (
+				0FFFF0AC047715691B7B8FE7 /* Headers */,
+				7D69C846EC96028939C0961C /* Sources */,
+				B5AB3E6C0CF44D44A3E56AD5 /* Resources */,
+				B7CF8A44F0C6EAE66106878A /* Frameworks */,
+				1CE007ABAEF6903BFD826C45 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimplePing;
+			packageProductDependencies = (
+			);
+			productName = SimplePing;
+			productReference = 7BEBBC39B099994A011DBEB3 /* SimplePing.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -572,15 +666,13 @@
 				en,
 			);
 			mainGroup = 726D35462CEFD386FFC53395;
-			packageReferences = (
-				350E6A87C6F02239D8A8CC9E /* XCRemoteSwiftPackageReference "ICMPPing" */,
-			);
 			productRefGroup = F62B906ACCEA7B7ACEE0E167 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				494E71147D3FFC5ED6A69A47 /* CoreInterface */,
 				3716A3849EB5951712D178E1 /* Servers */,
+				CFD4E5F0D5E44A1F4A33BE59 /* SimplePing */,
 				331DB1F92E782D4F4045016A /* SpeedTest */,
 				4D45066B345CF05C6741B28E /* SpeedTestUI */,
 			);
@@ -608,6 +700,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5564C8FB2F542F823CE6F608 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5AB3E6C0CF44D44A3E56AD5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -650,6 +749,14 @@
 				58911EC07325A363A67519DD /* FetchServersUseCaseImpl.swift in Sources */,
 				731701A8BD32CF816BA69A2A /* GetLocationUseCase.swift in Sources */,
 				B05D5E54311CDECCCA10BD25 /* SelectServerUseCaseImpl.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D69C846EC96028939C0961C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D3FDD643FF4E6242DB19E90 /* SimplePing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +821,12 @@
 			target = 3716A3849EB5951712D178E1 /* Servers */;
 			targetProxy = 51BB09E2C884EC8F72810B7A /* PBXContainerItemProxy */;
 		};
+		D28E037509199B76C25FC7B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SimplePing;
+			target = CFD4E5F0D5E44A1F4A33BE59 /* SimplePing */;
+			targetProxy = DD65346AD0F433161498293C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -728,6 +841,73 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2200B760C31D80476437BF2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/SimplePing-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = cz.olejnjak.SimplePing;
+				PRODUCT_NAME = SimplePing;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		36CF8DC5C26C5785E3FDF764 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/SimplePing-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = cz.olejnjak.SimplePing;
+				PRODUCT_NAME = SimplePing;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		5401549E1EEB934C43F351DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1124,6 +1304,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9D94FC1BC27B083D46EDDE80 /* Build configuration list for PBXNativeTarget "SimplePing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2200B760C31D80476437BF2A /* Debug */,
+				36CF8DC5C26C5785E3FDF764 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9F6B45871211DAFA9F4BB5EF /* Build configuration list for PBXNativeTarget "CoreInterface" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1143,24 +1332,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		350E6A87C6F02239D8A8CC9E /* XCRemoteSwiftPackageReference "ICMPPing" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/LebJe/ICMPPing";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E7DE3DAFFC287F76C7851DB1 /* ICMPPing */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ICMPPing;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A229A2EBCA8138063063B882 /* Project object */;
 }
