@@ -29,7 +29,7 @@ struct SpeedTestView: View {
                     }
                 }
                 .padding(.horizontal)
-                .foregroundStyle(SpeedTestUIAsset.Colors.foregroundSecondary.swiftUIColor)
+                .foregroundStyle(SpeedTestUIAsset.Colors.foregroundPrimary.swiftUIColor)
             }
             .frame(maxHeight: .infinity)
 
